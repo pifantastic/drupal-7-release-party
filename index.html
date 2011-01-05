@@ -49,7 +49,10 @@
       ui_speed: 10000,
       
       // Data update speed.
-      data_speed: 30000
+      data_speed: 30000,
+      
+      // Max number of items to keep in history sidebar.
+      max_history: 20
     };
     
     // Globalz.
@@ -149,7 +152,6 @@
      * Show a photo.
      */
     function showPhoto(photo) {
-      console.log(photo);
       $wrapper.fadeOut('slow', function() {
         $tweet.hide();
         $username.text(photo.ownername);
@@ -167,6 +169,10 @@
      * Add something to the history sidebar.
      */
     function remember(url, img, name, text) {
+      var hist = $('.history');
+      if (hist.length >= config.max_history) {
+        hist.slice(config.max_history).remove();
+      }
       text = text || '';
       $('<a class="history" target="_blank" href="' + url + '"><img src="' + img + '" /><span>' + name + '</span></a>')
         .attr('title', text).hide().insertAfter($data).slideDown();
