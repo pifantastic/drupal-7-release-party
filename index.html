@@ -5,12 +5,7 @@
   <link type="text/css" rel="stylesheet" media="all" href="style.css" />
 </head>
 <body>
-  <div id="history" class="loading">
-    <div id="data">
-      <span id="tweets">tweets: <span>0</span></span> 
-      <span id="images">images: <span>0</span></span>
-    </div>
-  </div>
+  <div id="history" class="loading"></div>
   <div id="wrapper" class="loading">
     <div id="info">
       <div id="avatar">
@@ -59,8 +54,6 @@
     var photos = [],
       photo_history = {},
       tweets = [],
-      total_images = 0,
-      total_tweets = 0,
       alternator = true,
       data_interval,
       ui_interval,
@@ -145,7 +138,6 @@
       });
       var url = 'http://twitter.com/' + tweet.from_user + '/status/' + tweet.id;
       remember(url, tweet.profile_image_url, tweet.from_user, tweet.text);
-      updateData(true, false);
     }
 
     /**
@@ -162,7 +154,6 @@
       });
       var url = 'http://flickr.com/photos/' + photo.ownername + '/status/' + photo.id;
       remember(url, flickr.thumbnail.avatar(photo), photo.ownername);
-      updateData(false, true);
     }
     
     /**
@@ -175,7 +166,7 @@
       }
       text = text || '';
       $('<a class="history" target="_blank" href="' + url + '"><img src="' + img + '" /><span>' + name + '</span></a>')
-        .attr('title', text).hide().insertAfter($data).slideDown();
+        .attr('title', text).hide().appendTo($history).slideDown();
     }
     
     /**
@@ -186,16 +177,6 @@
         clearInterval(data_interval);
       if (ui_interval)
         clearInterval(ui_interval);
-    }
-    
-    /**
-     * This is stupid.
-     */
-    function updateData(tweet, image) {
-      if (tweet)
-        $data.find('#tweets span').text(++total_tweets);
-      if (image)
-        $data.find('#images span').text(++total_images);
     }
   </script>
 </body>
