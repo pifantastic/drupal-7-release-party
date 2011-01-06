@@ -12,7 +12,7 @@ var flickr = {
 
 	thumbnail: {
 	  src: function(photo, size) {
-	    size = size || '_m';
+	    size = size || '_z';
 	    return 'http://farm' + photo.farm + '.static.flickr.com/' + photo.server + 
 	      '/' + photo.id + '_' + photo.secret + size + '.jpg'
 	  },
