@@ -14,9 +14,9 @@ var helpers = {
     return text.replace(regexp, ' <a href="http://search.twitter.com/search?q=&tag=$1&lang=all">#$1</a>');
   },
 
-	linkTweet: function(tweet) {
-		tweet = this.linkText(tweet);
-		tweet = this.linkTwitterUser(tweet);
-		return this.linkTwitterHash(tweet);
-	}
+  linkTweet: function(tweet) {
+    tweet = this.linkText(tweet);
+    tweet = this.linkTwitterUser(tweet);
+    return this.linkTwitterHash(tweet);
+  }
 };

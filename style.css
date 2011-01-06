@@ -41,13 +41,11 @@ div#history a.history:hover { background-color: #444; }
   div#history a img { margin-right: 10px; vertical-align: middle; }
 div#wrapper { display: none; }
 div#info { font-size: 38px; height: 50px; padding: 15px; border-bottom: 1px solid #555;}
-  div#info div#avatar { float: left; }
-		div#info div#avatar { width: 48px; }
+  div#info div#avatar { float: left; width: 48px; }
   div#info div#username { float: left; margin-left: 15px; }
-	div#info div#source { float: right; color: #777; }
+  div#info div#source { float: right; color: #777; }
 div#content { padding: 50px; }
-	div#content.twitter { font-size: 72px; }
-	div#content.facebook { font-size: 24px; }
-	div#content.flickr img { display: block; margin: 0 auto; }
-		div#content.flickr .caption { display: block; width: 500px; margin: 15px auto; text-align: center; }
-		
+  div#content.twitter { font-size: 72px; }
+  div#content.facebook { font-size: 24px; }
+  div#content.flickr img { display: block; margin: 0 auto; }
+    div#content.flickr .caption { display: block; width: 500px; margin: 15px auto; text-align: center; }
