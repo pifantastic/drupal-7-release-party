@@ -5,176 +5,78 @@
   <link type="text/css" rel="stylesheet" media="all" href="style.css" />
 </head>
 <body>
-  <div id="history" class="loading"></div>
-  <div id="wrapper" class="loading">
-    <div id="info">
-      <div id="avatar">
-        <img />
-      </div>
-      <div id="username"></div>
-    </div>
-    <div id="content">
-      <div id="tweet"></div>
-      <div id="image">
-        <img />
-        <div id="caption"></div>
-      </div>
-    </div>
+  <div id="info">
+    <img id="avatar" />
+    <div id="username"></div>
   </div>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+  <div id="content"></div>
+  <div id="history" class="loading"></div>
+  
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
+  <script type="text/javascript" src="helpers.js"></script>
+  <script type="text/javascript" src="pool.js"></script>
   <script type="text/javascript" src="flickr.js"></script>
   <script type="text/javascript" src="twitter.js"></script>
+  <script type="text/javascript" src="facebook.js"></script>
   <script type="text/javascript">
-    
     /**
      * Configure me!
      */
     var config = {
-    
       // Flickr tags to pull images from.
-      flickr_tags: ['drupal', 'd7rp'],
+      queries: ['drupal', 'd7rp'],
       
       // Flickr API key.
-      flickr_api_key: 'YOUR API KEY',
-      
-      // Twitter search query.
-      twitter_search: 'drupal | d7rp',
+      flickr_api_key: 'ae64df56f1ba99b66dd10e7d7540045d',
       
       // UI update speed.
-      ui_speed: 10000,
-      
-      // Data update speed.
-      data_speed: 30000,
-      
-      // Max number of items to keep in history sidebar.
-      max_history: 20
+      ui_speed: 1000
     };
     
     // Globalz.
-    var photos = [],
-      photo_history = {},
-      tweets = [],
-      alternator = true,
-      data_interval,
+    var data_interval,
       ui_interval,
-      $wrapper = $('#wrapper'),
-      $image = $('#image'),
       $username = $('#username'),
       $avatar = $('#avatar'),
-      $tweet = $('#tweet'),
-      $caption = $('#caption'),
-      $history = $('#history'),
-      $data = $('#data');
+      $content = $('#content'),
+      $history = $('#history');
     
     // Document ready.
     $(function() {
-      flickr.settings.api_key = config.flickr_api_key;
+      flickr.api_key = config.flickr_api_key;
       
-      // Fetch data now!
-      getData();
-      // Start data fetcher.
-      data_interval = setInterval(getData, config.data_speed);
-      // Start UI updater.
-      ui_interval = setInterval(updateUI, config.ui_speed);
+      // Create a new data pool with twitter, facebook and flickr as sources.
+      var pool = new DataPool([twitter, facebook, flickr], config.queries);
+      
+      // Update the UI every X seconds.
+      ui_interval = setInterval(function() {
+        // Grab a random object from the pool.
+        var object = pool.pluck();
+        
+        // Update the UI with the object's data.
+        if (object) {
+          $username.text(object.user);
+          $avatar.attr('src', object.avatar);
+          $content.html(object.content);
+          
+          // Save history.
+          remember(object);
+        }
+      }, config.ui_speed);
     });
-    
-    /**
-     * Fetch new data.
-     */
-    function getData() {
-      var params = {
-        tags: config.flickr_tags.join(','), 
-        safe_search: 1, 
-        extras: 'description, license, date_upload, date_taken, owner_name, icon_server, original_format, last_update, geo, tags, machine_tags, o_dims, views, media, path_alias, url_sq, url_t, url_s, url_m, url_z, url_l, url_o'
-      };
-      // Get new flickr photos.
-      if (photos.length < ((config.ui_speed / 1000) / 2)) {
-        flickr.search(params, function(ps) {
-          for (var x = 0; x < ps.length; x++) {
-            if (!photo_history[ps[x].id]) {
-              photos.push(ps[x]);
-              photo_history[ps[x].id] = true;
-            }
-          }
-        });
-      }
-      
-      // Get new tweets.
-      var data = { q: config.twitter_search };
-      if (tweets.length) 
-        data['max_id'] = tweets[tweets.length - 1].id;
-      twitter.search(data, function(ts) {
-        tweets = tweets.concat(ts);
-      });
-    }
-    
-    /**
-     * Update UI with a new tweet or photo.
-     */
-    function updateUI() {
-      $(".loading").removeClass('loading');
-      
-      if ((alternator || !photos.length) && tweets.length) {
-        var tweet = tweets.pop();
-        showTweet(tweet);
-      } else if ((!alternator || !tweets.length) && photos.length) {
-        var photo = photos.pop();
-        showPhoto(photo);
-      }
-    
-      alternator = !alternator;
-    }
-    
-    /**
-     * Show a tweet.
-     */
-    function showTweet(tweet) {
-      $wrapper.fadeOut('slow', function() {
-        $image.hide();
-        $username.text(tweet.from_user);
-        $avatar.find('img').attr('src', tweet.profile_image_url);
-        $tweet.show().html(tweet.text).linkUrl().linkUser().linkHash();
-        $wrapper.fadeIn();
-      });
-      var url = 'http://twitter.com/' + tweet.from_user + '/status/' + tweet.id;
-      remember(url, tweet.profile_image_url, tweet.from_user, tweet.text);
-    }
-
-    /**
-     * Show a photo.
-     */
-    function showPhoto(photo) {
-      $wrapper.fadeOut('slow', function() {
-        $tweet.hide();
-        $username.text(photo.ownername);
-        $avatar.find('img').attr('src', flickr.thumbnail.avatar(photo));
-        $image.show().find('img').attr('src', photo.url_m);
-        $caption.html(photo.description._content);
-        $wrapper.fadeIn();
-      });
-      var url = 'http://flickr.com/photos/' + photo.ownername + '/status/' + photo.id;
-      remember(url, flickr.thumbnail.avatar(photo), photo.ownername);
-    }
     
     /**
      * Add something to the history sidebar.
      */
-    function remember(url, img, name, text) {
-      var hist = $('.history');
-      if (hist.length >= config.max_history) {
-        hist.slice(config.max_history).remove();
-      }
-      text = text || '';
-      $('<a class="history" target="_blank" href="' + url + '"><img src="' + img + '" /><span>' + name + '</span></a>')
-        .attr('title', text).hide().appendTo($history).slideDown();
+    function remember(object) {
+      $('<div class="history">' + object.source + '<a target="_blank" href="' + object.url + '"><img src="' + object.avatar + '" /><span>' + object.user + '</span></a></div>')
+        .hide().prependTo($history).slideDown();
     }
     
     /**
      * Stop UI and Data timers.
      */
     function stop() {
-      if (data_interval)
-        clearInterval(data_interval);
       if (ui_interval)
         clearInterval(ui_interval);
     }

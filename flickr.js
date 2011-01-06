@@ -1,14 +1,13 @@
 (function($) {
 	
 var flickr = {
-	
-	settings: {
-	  api_key: ''
-	},
+	name: 'flickr',
+	data: [],
+	api_key: '',
 
-	url: function(method, params) {
-	  return 'http://api.flickr.com/services/rest/?method=' + method + '&format=json' +
-	    '&api_key=' + flickr.settings.api_key + ($.isEmptyObject(params) ? '' : '&' + $.param(params)) + '&jsoncallback=?'
+	url: function(params) {
+	  return 'http://api.flickr.com/services/rest/?method=flickr.photos.search&format=json' +
+	    '&api_key=' + this.api_key + '&' + $.param(params) + '&jsoncallback=?';
 	},
 
 	thumbnail: {
@@ -23,26 +22,36 @@ var flickr = {
 	   else
 	    return 'http://farm' + photo.iconfarm + '.static.flickr.com/' + photo.iconserver + 
 	      '/buddyicons/' + photo.owner + '.jpg'
-	  },
-	  imageTag: function(image) {
-	    return '<img src="' + image.src + '" alt="' + image.alt + '" />'
 	  }
 	},
 
-	exec: function(method, params, callback) {
-	  params = params || {};
-	  callback = $.isFunction(callback) ? callback : function() {};
+	search: function(queries, callback) {
+		var self = this;
+		
+		var params = {
+			tags: queries.join(','), 
+			safe_search: 1, 
+			extras: 'description, license, date_upload, date_taken, owner_name, icon_server, original_format, last_update, geo, tags, machine_tags, o_dims, views, media, path_alias, url_sq, url_t, url_s, url_m, url_z, url_l, url_o'
+		};
   
-	  $.getJSON(flickr.url(method, params), function(data) {
-	    var photos = data.photos || data.photoset;
-	    callback(photos.photo);
+	  $.getJSON(this.url(params), function(data) {
+			var photos = data.photos.photo.reverse();
+			for (var x = 0; x < photos.length; x++) {
+				self.data.push(self.format(photos[x]));
+			}
+	    callback();
 	  });
 	},
 	
-	search: function(params, callback) {
-		this.exec('flickr.photos.search', params, function(photos) {
-			callback(photos);
-		});
+	format: function(photo) {
+		return {
+			'id'      : photo.id,
+      'avatar'  : this.thumbnail.avatar(photo),
+      'user'    : photo.ownername,
+      'content' : '<img src="' + this.thumbnail.src(photo) + '" />',
+      'source'  : 'Flickr',
+      'link'    : 'http://flickr.com/photos/' + photo.ownername + '/status/' + photo.id
+    };
 	}
 	
 };
