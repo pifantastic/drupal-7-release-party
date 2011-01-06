@@ -8,7 +8,7 @@
   <div id="history" class="loading"></div>
   <div id="wrapper" class="loading">
     <div id="info">
-      <div id="avatar"><img /></div>
+      <div id="avatar"><img width="48" height="48" /></div>
       <div id="username"></div>
       <div id="source"></div>
     </div>
@@ -81,8 +81,12 @@
      * Add something to the history sidebar.
      */
     function remember(object) {
-      $('<a class="history" target="_blank" href="' + object.url + '"><img src="' + object.avatar + '" /><span>' + object.user + '</span></a>')
-        .hide().prependTo($history).slideDown();
+      var html = 
+        '<a class="history" target="_blank" href="' + object.url + '">' + 
+          '<img height="48" width="48" src="' + object.avatar + '" />' + 
+          '<span>' + object.user + '</span>' + 
+        '</a>';
+      $(html).hide().prependTo($history).slideDown();
     }
     
     /**
