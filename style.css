@@ -1,0 +1,53 @@
+/* Layout */
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  height: 100%; 
+  max-height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #222;
+  color: #FFF;
+}
+#history {
+  position: absolute;
+  top: 0;
+  bottom: 0; 
+  left: 0;
+  width: 300px;
+  height: 100%;
+  overflow: hidden;
+  border-right: 3px solid #56B3E6;
+}
+#wrapper {
+  position: fixed;
+  top: 0; 
+  left: 300px;
+  right: 0;
+  bottom: 0;
+  overflow: auto; 
+}
+
+/* H4x */
+* html body{ padding: 0 0 0 300px; }
+* html #wrapper { height: 100%; width: 100%; }
+
+/* Appearance */
+a { color: #56B3E6; text-decoration: none; }
+.loading { background-image: url(loading.gif); background-repeat: no-repeat; background-position: center center; }
+div#history a.history { display: block; padding: 5px; border: 1px solid #444; -moz-border-radius: 3px; border-radius: 3px; margin: 5px; background-color: #333; }
+div#history a.history:hover { background-color: #444; }
+  div#history a img { margin-right: 10px; vertical-align: middle; }
+div#wrapper { display: none; }
+div#info { font-size: 38px; height: 50px; padding: 15px; border-bottom: 1px solid #555;}
+  div#info div#avatar { float: left; }
+		div#info div#avatar { width: 48px; }
+  div#info div#username { float: left; margin-left: 15px; }
+	div#info div#source { float: right; color: #777; }
+div#content { padding: 50px; }
+	div#content.twitter { font-size: 72px; }
+	div#content.facebook { font-size: 24px; }
+	div#content.flickr img { display: block; margin: 0 auto; }
+		div#content.flickr .caption { display: block; width: 500px; margin: 15px auto; text-align: center; }
+		

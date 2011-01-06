@@ -48,7 +48,7 @@ var flickr = {
 			'id'      : photo.id,
       'avatar'  : this.thumbnail.avatar(photo),
       'user'    : photo.ownername,
-      'content' : '<img src="' + this.thumbnail.src(photo) + '" />',
+      'content' : '<img src="' + this.thumbnail.src(photo) + '" /><span class="caption">' + photo.description._content + '</span>',
       'source'  : 'Flickr',
       'link'    : 'http://flickr.com/photos/' + photo.ownername + '/status/' + photo.id
     };

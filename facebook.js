@@ -40,7 +40,7 @@ var facebook = {
 			'id'      : post.id,
       'avatar'  : 'http://graph.facebook.com/' + post.from.id + '/picture',
       'user'    : post.from.name,
-      'content' : post.message,
+      'content' : helpers.linkText(post.message),
       'source'  : 'Facebook',
       'link'    : 'http://facebook.com/' + post.from.id + '/posts/' + post.id.split('_')[1]
     };

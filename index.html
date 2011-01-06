@@ -5,12 +5,15 @@
   <link type="text/css" rel="stylesheet" media="all" href="style.css" />
 </head>
 <body>
-  <div id="info">
-    <img id="avatar" />
-    <div id="username"></div>
-  </div>
-  <div id="content"></div>
   <div id="history" class="loading"></div>
+  <div id="wrapper" class="loading">
+    <div id="info">
+      <div id="avatar"><img /></div>
+      <div id="username"></div>
+      <div id="source"></div>
+    </div>
+    <div id="content"></div>
+  </div>
   
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
   <script type="text/javascript" src="helpers.js"></script>
@@ -30,12 +33,14 @@
       flickr_api_key: 'ae64df56f1ba99b66dd10e7d7540045d',
       
       // UI update speed.
-      ui_speed: 1000
+      ui_speed: 7000
     };
     
     // Globalz.
     var data_interval,
       ui_interval,
+      $wrapper = $('#wrapper'),
+      $source = $('#source'),
       $username = $('#username'),
       $avatar = $('#avatar'),
       $content = $('#content'),
@@ -50,14 +55,21 @@
       
       // Update the UI every X seconds.
       ui_interval = setInterval(function() {
+        $('.loading').removeClass('loading');
+        
         // Grab a random object from the pool.
         var object = pool.pluck();
         
         // Update the UI with the object's data.
         if (object) {
-          $username.text(object.user);
-          $avatar.attr('src', object.avatar);
-          $content.html(object.content);
+          $wrapper.fadeOut('slow', function() {
+            $username.text(object.user);
+            $avatar.find('img').attr('src', object.avatar);
+            $content.html(object.content);
+            $source.text(object.source);
+            $content.attr('class', object.source.toLowerCase());
+            $wrapper.fadeIn();
+          });
           
           // Save history.
           remember(object);
@@ -69,7 +81,7 @@
      * Add something to the history sidebar.
      */
     function remember(object) {
-      $('<div class="history">' + object.source + '<a target="_blank" href="' + object.url + '"><img src="' + object.avatar + '" /><span>' + object.user + '</span></a></div>')
+      $('<a class="history" target="_blank" href="' + object.url + '"><img src="' + object.avatar + '" /><span>' + object.user + '</span></a>')
         .hide().prependTo($history).slideDown();
     }
     
