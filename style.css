@@ -21,16 +21,16 @@ table {border-collapse: collapse;	border-spacing: 0; }
 /* Stylez */
 html, body {height: 100%; }
 html {background: url('img/bg-body.png') repeat-x left top fixed; }
-body {width: 1372px; margin: 0 auto; color: #fff; }
+body {width: 1372px; margin: 0 auto; color: #fff; font-family: helvetica, sans-serif; }
 body::-webkit-scrollbar {width: 0; height: 0;}
 
 @font-face {font-family: PUSAB; src: url('fonts/PUSAB___.otf'); }
 
 a {color: #37f; }
-.loading { background-image: url('img/loading.gif'); background-repeat: no-repeat; background-position: center center; }
+.loading { background-image: url('img/loading2.gif'); background-repeat: no-repeat; background-position: center center; }
 
 div#wrapper-wrapper {width: 1372px; padding: 32px 0 86px 0; background: url('img/bubble-tail.png') no-repeat 420px bottom; position: relative; }
-div#wrapper {background: #fff; max-width: 980px; height: 300px; margin: 0 auto; padding: 20px; border-radius: 20px; color: #000; font-family: PUSAB, sans-serif; text-align: center; }
+div#wrapper {background: #fff; max-width: 876px; height: 300px; margin: 0 auto; padding: 20px 32px; border-radius: 20px; color: #000; font-family: PUSAB, sans-serif; text-align: center; }
 div#wrapper-qfresh {}
 
 div#avatar {width: 64px; height: 64px; background-repeat: no-repeat; background-position: left top; background-size: 64px; -webkit-mask-box-image: url('img/mask2.png') 75 stretch; position: absolute; bottom: -23px; left: 313px; }
@@ -39,14 +39,16 @@ div#info {width: 500px; margin-left: -250px; text-align: center; font-family: He
   div#username {display: inline-block; }
   div#source {display: inline-block; }
 
-div#content {font-family: PUSAB, sans-serif; font-size: 3em; }
-div#content.twitter {font-size: 3em; }
-div#content.facebook {font-size: 2em; }
-div#content.flickr {font-size: 1.2em; }
+div#content {display: table-cell; height: 270px; vertical-align: middle; font-family: PUSAB, sans-serif; font-size: 3em; }
+div#content.twitter {font-size: 3.2em; }
+div#content.facebook {font-size: 2.4em; }
+div#content.flickr {font-size: 1.5em; }
 div#content.flickr img {}
 div#content.flickr .caption {display: block; padding: 12px 100px; font-size: 1.3em; }
 
 div#details {width: 1372px; min-height: 585px; margin-top: -64px; background: url('img/bg-cityman.png') no-repeat center bottom; }
+div#footer {text-align: center; position: relative; top: 132px; font-size: .9em; opacity: .5; text-shadow: 1px 1px 0 rgba(0,0,0,.4); }
+div#footer a {color: #fff; }
 
 div#history {float: left; width: 300px; height: 416px; margin: 0 0 0 440px; padding: 0; position: relative; top: 100px; overflow: hidden; }
 div#history a.history {display: block; margin: 0 0 8px 0; border: 0; padding: .5em; background: rgba(0,0,0,0.7); border-radius: 5px; font-family: Helvetica, sans-serif; text-decoration: none; color: #fff; }
