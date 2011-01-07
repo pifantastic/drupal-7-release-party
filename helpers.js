@@ -11,7 +11,7 @@ var helpers = {
 
   linkTwitterHash: function(text) {
     var regexp = /(?:^| )[\#]+([A-Za-z0-9-_]+)/gi;
-    return text.replace(regexp, ' <a href="http://search.twitter.com/search?q=&tag=$1&lang=all">#$1</a>');
+    return text.replace(regexp, ' <a href="http://search.twitter.com/search?q=&tag=$1&lang=all"><span class="hash">#</span>$1</a>');
   },
 
   linkTweet: function(tweet) {
