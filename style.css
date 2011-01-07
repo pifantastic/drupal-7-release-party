@@ -26,16 +26,16 @@ body::-webkit-scrollbar {width: 0; height: 0;}
 
 @font-face {font-family: PUSAB; src: url('fonts/PUSAB___.otf'); }
 
+a {color: #37f; }
 .loading { background-image: url(loading.gif); background-repeat: no-repeat; background-position: center center; }
 
 div#wrapper-wrapper {width: 1372px; padding: 32px 0 86px 0; background: url('img/bubble-tail.png') no-repeat 420px bottom; position: relative; }
 div#wrapper {background: #fff; max-width: 980px; height: 300px; margin: 0 auto; padding: 20px; border-radius: 20px; color: #000; font-family: PUSAB, sans-serif; text-align: center; }
 div#wrapper-qfresh {}
 
-div#avatar {position: absolute; bottom: -20px; left: 314px; }
+div#avatar {width: 64px; height: 64px; background-repeat: no-repeat; background-position: left top; background-size: 64px; -webkit-mask-box-image: url('img/mask.png') stretch; position: absolute; bottom: -23px; left: 313px; }
 
-div#info {text-align: center; font-family: Helvetica, sans-serif; color: #789; position: absolute; bottom: 116px; left: 50%; }
-div#info div#avatar img {}
+div#info {width: 500px; margin-left: -250px; text-align: center; font-family: Helvetica, sans-serif; color: #789; position: absolute; bottom: 116px; left: 50%; }
 div#info div#username {display: inline-block; }
 div#info div#source {display: inline-block; }
 
@@ -53,5 +53,7 @@ div#history a.history {display: block; margin: 0 0 8px 0; border: 0; padding: .5
 div#history a.history:hover {background: rgba(0,0,0,1); }
 div#history a.history span {position: relative; top: -18px; left: 12px; }
 div#history a img {position: relative; top: 1px; }
+p#tags {margin: 0 0 10px; padding: 0 0 5px 0; border-bottom: 2px solid #eee; font-family: Helvetica, sans-serif; font-size: 1.25em; line-height: 1.5em; }
 
-div#event {margin: 0 0 0 800px; padding: 0 0 0 45px; border-left: 2px dotted #fff; position: relative; top: 100px; }
+div#event {margin: 0 0 0 800px; padding: 0 0 0 115px; border-left: 2px dotted #fff; background: url('img/drop.png') no-repeat 24px top; font-family: Helvetica, sans-serif; line-height: 1.5em; position: relative; top: 100px; }
+div#event p {margin-bottom: 1em; }
