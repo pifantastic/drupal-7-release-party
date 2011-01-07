@@ -47,6 +47,9 @@
   <script type="text/javascript" src="flickr.js"></script>
   <script type="text/javascript" src="twitter.js"></script>
   <script type="text/javascript" src="facebook.js"></script>
+  <script type="text/javascript" src="Three.js"></script>
+  <script type="text/javascript" src="Bird.js"></script>
+  <script type="text/javascript" src="Bats.js"></script>
   <script type="text/javascript">
     /**
      * Configure me!
@@ -56,7 +59,7 @@
       queries: ['drupal', 'd7rp'],
       
       // Flickr API key.
-      flickr_api_key: 'ae64df56f1ba99b66dd10e7d7540045d',
+      flickr_api_key: 'YOUR API KEY',
       
       // UI update speed.
       ui_speed: 7000
@@ -95,10 +98,17 @@
             console.log(object.avatar);
             $avatar.css('background-image', 'url('+object.avatar+')');
             $content.html(object.content);
-            $source.text(' from '+object.source);
+            $source.text(' from ' + object.source);
             $content.attr('class', object.source.toLowerCase());
           });
           $inner.fadeIn('slow');
+          if (helpers.isAustin(object.content)) {
+            var interval = bats();
+            setTimeout(function() {
+              if (renderer) renderer.clear();
+              clearInterval(interval);
+            }, config.ui_speed);
+          }
           
           // Save history.
           remember(object);

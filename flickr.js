@@ -6,8 +6,8 @@ var flickr = {
   api_key: '',
 
   url: function(params) {
-  return 'http://api.flickr.com/services/rest/?method=flickr.photos.search&format=json' +
-  '&api_key=' + this.api_key + '&' + $.param(params) + '&jsoncallback=?';
+    return 'http://api.flickr.com/services/rest/?method=flickr.photos.search&format=json' +
+      '&api_key=' + this.api_key + '&' + $.param(params) + '&jsoncallback=?';
   },
 
   thumbnail: {

@@ -57,3 +57,5 @@ p#tags {margin: 0 0 10px; padding: 0 0 5px 0; border-bottom: 2px solid #eee; fon
 
 div#event {margin: 0 0 0 800px; padding: 0 0 0 115px; border-left: 2px dotted #fff; background: url('img/drop.png') no-repeat 24px top; font-family: Helvetica, sans-serif; line-height: 1.5em; position: relative; top: 100px; }
 div#event p {margin-bottom: 1em; }
+
+canvas.bats { position: absolute; top: 0; left: 0; }
