@@ -50,7 +50,7 @@ var flickr = {
       'user'    : photo.ownername,
       'content' : '<img src="' + this.thumbnail.src(photo) + '" /><span class="caption">' + photo.description._content + '</span>',
       'source'  : 'Flickr',
-      'link'    : 'http://flickr.com/photos/' + photo.ownername + '/status/' + photo.id
+      'link'    : 'http://flickr.com/photos/' + photo.ownername + '/' + photo.id
     };
   }
 
