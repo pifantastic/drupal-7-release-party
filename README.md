@@ -5,7 +5,7 @@
 
 # Configuration
 
-* Open index.html and locate the config object.
+* Open index.html in a text editor and locate the config object.
 
       var config = {
         // Flickr tags to pull images from.
@@ -18,4 +18,4 @@
         ui_speed: 7000
       };
 
-* Save your changes!  That's it!
+* Make any changes you would like and save it.  That's it!
