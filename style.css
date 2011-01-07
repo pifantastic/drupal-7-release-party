@@ -41,6 +41,7 @@ div#info {width: 500px; margin-left: -250px; text-align: center; font-family: He
 
 div#content {display: table-cell; height: 270px; vertical-align: middle; font-family: PUSAB, sans-serif; font-size: 3em; }
 div#content.twitter {font-size: 3.1em; }
+div#content.twitter span.hash { font-family: helvetica, sans-serif; }
 div#content.facebook {font-size: 2.4em; }
 div#content.flickr {font-size: 1.5em; }
 div#content.flickr img {}
