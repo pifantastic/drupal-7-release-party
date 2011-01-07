@@ -40,6 +40,9 @@
   <script type="text/javascript" src="flickr.js"></script>
   <script type="text/javascript" src="twitter.js"></script>
   <script type="text/javascript" src="facebook.js"></script>
+  <script type="text/javascript" src="Three.js"></script>
+  <script type="text/javascript" src="Bird.js"></script>
+  <script type="text/javascript" src="Bats.js"></script>
   <script type="text/javascript">
     /**
      * Configure me!
@@ -86,10 +89,17 @@
             $username.text(object.user);
             $avatar.find('img').attr('src', object.avatar);
             $content.html(object.content);
-            $source.text(' from '+object.source);
+            $source.text(' from ' + object.source);
             $content.attr('class', object.source.toLowerCase());
           });
           $inner.fadeIn('slow');
+          if (helpers.isAustin(object.content)) {
+            var interval = bats();
+            setTimeout(function() {
+              if (renderer) renderer.clear();
+              clearInterval(interval);
+            }, config.ui_speed);
+          }
           
           // Save history.
           remember(object);

@@ -18,5 +18,9 @@ var helpers = {
     tweet = this.linkText(tweet);
     tweet = this.linkTwitterUser(tweet);
     return this.linkTwitterHash(tweet);
+  },
+  
+  isAustin: function(text) {
+    return (text.toLowerCase().indexOf('d7rp_austin') != -1);
   }
 };

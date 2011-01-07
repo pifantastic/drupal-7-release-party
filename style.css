@@ -55,3 +55,5 @@ div#history a.history span {position: relative; top: -18px; left: 12px; }
 div#history a img {position: relative; top: 1px; }
 
 div#event {margin: 0 0 0 800px; padding: 0 0 0 45px; border-left: 2px dotted #fff; position: relative; top: 100px; }
+
+canvas.bats { position: absolute; top: 0; left: 0; }
