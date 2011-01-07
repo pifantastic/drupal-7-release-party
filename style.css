@@ -41,11 +41,11 @@ div#info {width: 500px; margin-left: -250px; text-align: center; font-family: He
 
 div#content {display: table-cell; height: 270px; vertical-align: middle; font-family: PUSAB, sans-serif; font-size: 3em; }
 div#content.twitter {font-size: 3.1em; }
-div#content.twitter span.hash { font-family: helvetica, sans-serif; }
 div#content.facebook {font-size: 2.4em; }
 div#content.flickr {font-size: 1.5em; }
 div#content.flickr img {}
 div#content.flickr .caption {display: block; padding: 12px 100px; font-size: 1.3em; }
+div#content span.hash { font-family: helvetica, sans-serif; font-weight: bold; }
 
 div#details {width: 1372px; min-height: 585px; margin-top: -64px; background: url('img/bg-cityman.png') no-repeat center bottom; }
 div#footer {text-align: center; position: relative; top: 132px; font-size: .9em; opacity: .5; text-shadow: 1px 1px 0 rgba(0,0,0,.4); }
