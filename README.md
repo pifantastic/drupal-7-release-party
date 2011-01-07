@@ -11,7 +11,8 @@
         // What to search for.
         queries: ['drupal', 'd7rp'],
   
-        // Flickr API key.
+        // Flickr API key. (leaving this out will exclude flickr 
+        // images but still grab Twitter and Facebook statuses)
         flickr_api_key: 'YOUR API KEY',
   
         // UI update speed.
