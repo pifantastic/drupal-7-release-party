@@ -8,7 +8,7 @@
 * Open index.html in a text editor and locate the config object.
 
       var config = {
-        // Flickr tags to pull images from.
+        // What to search for.
         queries: ['drupal', 'd7rp'],
   
         // Flickr API key.
