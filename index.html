@@ -5,14 +5,33 @@
   <link type="text/css" rel="stylesheet" media="all" href="style.css" />
 </head>
 <body>
-  <div id="history" class="loading"></div>
-  <div id="wrapper" class="loading">
-    <div id="info">
-      <div id="avatar"><img width="48" height="48" /></div>
-      <div id="username"></div>
-      <div id="source"></div>
+  <div id="wrapper-wrapper">
+    <div id="wrapper" class="loading">
+      <div id="wrapper-qfresh">
+        <div id="content"></div>
+        <div id="avatar"><img width="48" height="48" /></div>
+        <div id="info">
+          <div id="username"></div>
+          <div id="source"></div>
+        </div>
+      </div>
     </div>
-    <div id="content"></div>
+  </div>
+  <div id="details">
+    <div id="history" class="loading"></div>
+    <div id="event">
+      <div class="vevent">
+        <h2 class="summary">Drupal 7 Austin Release Party</h2>
+        <abbr class="dtstart" title="2011-01-07T06:30:00-06:00">Friday 1.7.2011<br />6:30</abbr> 
+        - <abbr class="dtend" title="2011-01-07T09:30:00-05:00">9:30am CST</abbr>
+        <div class="location hcard">
+          <p class="adr">
+            <span class="street-address"></span>
+            <span class="locality">Austin</span>, <abbr title="Texas" class="region">TX</abbr> <span class="postal-code">78704</span>
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
   
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
@@ -33,13 +52,14 @@
       flickr_api_key: 'ae64df56f1ba99b66dd10e7d7540045d',
       
       // UI update speed.
-      ui_speed: 7000
+      ui_speed: 2000
     };
     
     // Globalz.
     var data_interval,
       ui_interval,
       $wrapper = $('#wrapper'),
+      $inner = $('#wrapper-qfresh'),
       $source = $('#source'),
       $username = $('#username'),
       $avatar = $('#avatar'),
@@ -62,14 +82,14 @@
         
         // Update the UI with the object's data.
         if (object) {
-          $wrapper.fadeOut('slow', function() {
+          $inner.fadeOut('slow',function(){
             $username.text(object.user);
             $avatar.find('img').attr('src', object.avatar);
             $content.html(object.content);
-            $source.text(object.source);
+            $source.text(' from '+object.source);
             $content.attr('class', object.source.toLowerCase());
-            $wrapper.fadeIn();
           });
+          $inner.fadeIn('slow');
           
           // Save history.
           remember(object);
@@ -82,7 +102,7 @@
      */
     function remember(object) {
       var html = 
-        '<a class="history" target="_blank" href="' + object.url + '">' + 
+        '<a class="history" target="_blank" href="' + object.link + '">' + 
           '<img height="48" width="48" src="' + object.avatar + '" />' + 
           '<span>' + object.user + '</span>' + 
         '</a>';
