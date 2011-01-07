@@ -94,11 +94,10 @@
         // Update the UI with the object's data.
         if (object) {
           $inner.fadeOut('slow',function(){
-            $username.text(object.user);
-            console.log(object.avatar);
+            $username.text('\u2014 ' + object.user);
             $avatar.css('background-image', 'url('+object.avatar+')');
             $content.html(object.content);
-            $source.text(' from ' + object.source);
+            $source.text(' from ' + object.source + ' \u2014');
             $content.attr('class', object.source.toLowerCase());
           });
           $inner.fadeIn('slow');
